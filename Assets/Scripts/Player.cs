@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float strength;
+    public float strength,gravity;
     private Rigidbody2D directionRb;
     private Vector3 direction;
     //private Vector3 direction;
     // Start is called before the first frame update
     void Start()
     {
+        gravity = -9.5f;
         strength = 5f;
         directionRb = GetComponent<Rigidbody2D>();
     }
@@ -22,5 +23,7 @@ public class Player : MonoBehaviour
         {
             direction = Vector3.up * strength;
         }
+        transform.position += direction * Time.deltaTime;
+        direction.y += gravity * Time.deltaTime;
     }
 }
