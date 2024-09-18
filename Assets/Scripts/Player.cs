@@ -32,8 +32,8 @@ public class Player : MonoBehaviour
            // transform.position += Vector3.up * strength * Time.deltaTime;
             direction = Vector3.up * strength;
         }
-       transform.position += direction * Time.deltaTime;
-       // y = gravity * Time.deltaTime;
+        transform.position += direction * Time.deltaTime;
+        // y = gravity * Time.deltaTime;
         direction.y += gravity * Time.deltaTime;
     }
     private void AnimatedSprite()
@@ -44,5 +44,16 @@ public class Player : MonoBehaviour
             spriteIndex = 0;
         }
         spriteRenderer.sprite = sprites[spriteIndex];
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Obsacle")
+        {
+            FindObjectOfType<GameManager>().GameOver();
+        }
+        else if (collision.gameObject.tag == "score")
+        {
+            FindObjectOfType<GameManager>().IncreaseScore();
+        }
     }
 }
